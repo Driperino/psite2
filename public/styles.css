@@ -16,6 +16,7 @@ body {
 body,
 .navbar,
 .nav-button,
+.nav-button:hover,
 h1 {
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
@@ -80,6 +81,7 @@ h1 {
 .nav-button:hover {
     background-color: transparent;
     color: rgb(4, 132, 141);
+    text-shadow: none;
     transform: scale(1.1);
 }
 

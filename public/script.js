@@ -32,8 +32,8 @@ function createStar() {
   }
 
   if (isRareStar) {
-    const minRareSize = 200;
-    const maxRareSize = 550;
+    const minRareSize = 150;
+    const maxRareSize = 350;
     size = Math.floor(Math.random() * (maxRareSize - minRareSize + 1)) + minRareSize;
     // Slow down the animation based on size
     duration = (size / minRareSize) * 20; // Example calculation
