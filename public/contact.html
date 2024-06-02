@@ -23,7 +23,9 @@
     </nav>
 
     <div id="contact" class="container section contact">
-        <form id="contactForm" action="/submit-form" method="POST">
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            <!--THIS HAS REPLCED 5 HOURS OF TRIAL AND ERROR lmao-->
+            <input type="hidden" name="access_key" value="80ea3daf-fe57-4d18-b824-448545563f44">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -36,6 +38,7 @@
             <button type="submit">Submit</button>
         </form>
     </div>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
     <script src="script.js"></script>
     <footer>
         <a href="https://www.youtube.com/channel/UCjOPQ8N5jCyZDOlQl0DSuNQ"><i class="bi bi-youtube"></i></a>
