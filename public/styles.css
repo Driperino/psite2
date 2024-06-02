@@ -12,6 +12,10 @@ body {
     overflow: hidden;
 }
 
+p {
+    background-color: rgba(0, 0, 0, 0.428);
+}
+
 /* Add black outline to all text */
 body,
 .navbar,
@@ -31,6 +35,7 @@ h1 {
     z-index: -1000;
 }
 
+/* Navbar styling */
 .navbar {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.915);
@@ -85,6 +90,18 @@ h1 {
     transform: scale(1.1);
 }
 
+/* Media Query for larger screens */
+@media screen and (min-width: 768px) {
+    .nav-title h1 {
+        font-size: 3rem;
+    }
+
+    .nav-button {
+        font-size: 1.5rem;
+    }
+}
+
+/*-----------------------------------------------*/
 .container {
     text-align: center;
     width: 80%;
@@ -131,17 +148,6 @@ footer a:hover {
     transform: scale(1.1);
 }
 
-/* Media Query for larger screens */
-@media screen and (min-width: 768px) {
-    .nav-title h1 {
-        font-size: 3rem;
-    }
-
-    .nav-button {
-        font-size: 1.5rem;
-    }
-}
-
 .container #contact {
     max-width: 800px;
     margin: 0 auto;
@@ -184,7 +190,54 @@ button[type="submit"]:hover {
     background-color: rgb(4, 132, 141);
 }
 
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
 
+/* Dropdown menu content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.9);
+    min-width: 160px;
+    z-index: 1000;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+/* Dropdown menu items */
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Hover effect for dropdown menu items */
+.dropdown-content a:hover {
+    background-color: transparent;
+    color: rgb(4, 132, 141);
+}
+
+/* Show dropdown menu when hover over the dropdown button */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Styles for the dropdown button */
+.dropbtn {
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+/* STAR STYLING --------------------------------------------------*/
 .star {
     position: absolute;
     background-color: white;
@@ -227,3 +280,5 @@ button[type="submit"]:hover {
         /* Makes the star fall from top to bottom */
     }
 }
+
+/*---------------------------------------------------------------*/
