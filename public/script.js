@@ -28,7 +28,7 @@ function createStar() {
     isRareStar = false; // If a rare star is already active, create a normal star
   } else {
     // Determine if this star will be a rare star
-    isRareStar = Math.random() < 1 / 50;
+    isRareStar = Math.random() < 1 / 3;
   }
 
   if (isRareStar) {

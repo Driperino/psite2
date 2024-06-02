@@ -12,6 +12,14 @@ body {
     overflow: hidden;
 }
 
+/* Add black outline to all text */
+body,
+.navbar,
+.nav-button,
+h1 {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
 .background {
     position: fixed;
     top: 0;
@@ -27,6 +35,9 @@ body {
     background-color: rgba(0, 0, 0, 0.915);
     display: flex;
     justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
     position: fixed;
     top: 0;
     left: 0;
@@ -38,6 +49,15 @@ body {
     display: flex;
     flex-direction: row;
     gap: 1px;
+    align-items: center;
+    /* Center vertically */
+}
+
+.nav-title h1 {
+    margin: 0;
+    color: white;
+    font-size: 2rem;
+    /* Set a specific font size for the h1 */
 }
 
 .nav-button {
@@ -52,8 +72,10 @@ body {
     transition: background-color 0.3s, transform 0.3s;
     font-family: 'Courier New', monospace;
     font-size: 1rem;
+    /* Set a specific font size for the buttons */
     cursor: pointer;
 }
+
 
 .nav-button:hover {
     background-color: transparent;
@@ -109,12 +131,12 @@ footer a:hover {
 
 /* Media Query for larger screens */
 @media screen and (min-width: 768px) {
-    h1 {
-        font-size: 4vw;
+    .nav-title h1 {
+        font-size: 3rem;
     }
 
     .nav-button {
-        font-size: 1.5vw;
+        font-size: 1.5rem;
     }
 }
 
