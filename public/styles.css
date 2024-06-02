@@ -102,6 +102,9 @@ h1 {
 }
 
 /*-----------------------------------------------*/
+/**
+ * Styles for the container element.
+ */
 .container {
     text-align: center;
     width: 80%;
@@ -114,6 +117,9 @@ h1 {
     height: 100%;
 }
 
+/**
+ * Styles for the h1 element.
+ */
 h1 {
     color: white;
     background-color: transparent;
@@ -124,6 +130,9 @@ h1 {
     transition: transform 0.5s ease;
 }
 
+/**
+ * Styles for the footer element.
+ */
 footer {
     position: fixed;
     left: 0;
@@ -135,29 +144,47 @@ footer {
     padding: 5px 0;
 }
 
+/**
+ * Styles for the links inside the footer element.
+ */
 footer a {
     color: white;
 }
 
+/**
+ * Styles for the copy element inside the footer element.
+ */
 #copy {
     font-size: 12px;
 }
 
+/**
+ * Styles for the links inside the footer element when hovered.
+ */
 footer a:hover {
     color: rgb(4, 132, 141);
     transform: scale(1.1);
 }
 
+/**
+ * Styles for the contact section inside the container element.
+ */
 .container #contact {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
+/**
+ * Styles for the contact section inside the section element.
+ */
 .section #contact {
     margin-bottom: 40px;
 }
 
+/**
+ * Styles for the label elements.
+ */
 label {
     display: block;
     margin-bottom: 10px;
@@ -166,6 +193,9 @@ label {
     outline: black;
 }
 
+/**
+ * Styles for the input and textarea elements.
+ */
 input,
 textarea {
     width: 100%;
@@ -177,6 +207,9 @@ textarea {
     color: white;
 }
 
+/**
+ * Styles for the submit button.
+ */
 button[type="submit"] {
     background-color: rgb(4, 167, 179);
     color: white;
@@ -186,6 +219,9 @@ button[type="submit"] {
     cursor: pointer;
 }
 
+/**
+ * Styles for the submit button when hovered.
+ */
 button[type="submit"]:hover {
     background-color: rgb(4, 132, 141);
 }
