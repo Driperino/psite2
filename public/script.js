@@ -28,7 +28,7 @@ function createStar() {
     isRareStar = false; // If a rare star is already active, create a normal star
   } else {
     // Determine if this star will be a rare star
-    isRareStar = Math.random() < 1 / 3;
+    isRareStar = Math.random() < 1 / 10;
   }
 
   if (isRareStar) {
@@ -45,8 +45,8 @@ function createStar() {
     const maxSize = 5;
     size = Math.floor(Math.random() * (maxSize - minSize + 1)) + minSize;
     // Randomize the animation duration for normal stars
-    const minDuration = 3;
-    const maxDuration = 9;
+    const minDuration = 2;
+    const maxDuration = 13;
     duration = Math.floor(Math.random() * (maxDuration - minDuration) + minDuration);
   }
 
@@ -57,8 +57,15 @@ function createStar() {
   star.style.height = `${size}px`;
   star.style.animationDuration = `${duration}s`;
 
+  // Styling for the Rare stars - They're planets but i dont wanna change all the names in the code.......
   if (isRareStar) {
+    const rareStarColors = ['rgb(190, 183, 223)', 'rgb(4, 139, 168)', 'rgb(242, 211, 152)', 'rgb(144, 50, 61)', 'rgb(86, 71, 135)']; // Add more colours here
+    let randomColor = rareStarColors[Math.floor(Math.random() * rareStarColors.length)];
     star.classList.add('rare-star');
+    star.style.backgroundColor = randomColor;
+    star.style.boxShadow = `5px 5px 5px ${randomColor}`;
+    star.style.opacity = 1;
+    star.style.zIndex = '-900'; // BG is -1000 navbar and footer is +1000
   }
 
   document.body.appendChild(star);
@@ -82,5 +89,3 @@ function generateStars() {
 document.addEventListener('DOMContentLoaded', generateStars);
 
 //----------------------------------------------------------------
-//Contact Form ---------------------------------------------------
-

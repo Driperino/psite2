@@ -1,3 +1,4 @@
+/* General styles */
 body {
     font-family: 'Courier New', monospace;
     margin: 0;
@@ -7,13 +8,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Adjusted to prevent overflow issues */
     height: 100vh;
     overflow: hidden;
 }
 
 p {
-    background-color: rgba(0, 0, 0, 0.428);
+    border-radius: 33px;
 }
 
 /* Add black outline to all text */
@@ -41,14 +43,13 @@ h1 {
     background-color: rgba(0, 0, 0, 0.915);
     display: flex;
     justify-content: center;
-    /* Center horizontally */
     align-items: center;
-    /* Center vertically */
     position: fixed;
     top: 0;
-    left: 0;
-    z-index: 1000;
     padding: 10px 0;
+    flex-direction: row;
+    z-index: 1000;
+    /* Ensure navbar is above other elements */
 }
 
 .nav-buttons {
@@ -56,20 +57,18 @@ h1 {
     flex-direction: row;
     gap: 1px;
     align-items: center;
-    /* Center vertically */
 }
 
 .nav-title h1 {
     margin: 0;
     color: white;
     font-size: 2rem;
-    /* Set a specific font size for the h1 */
 }
 
 .nav-button {
     display: inline-block;
     padding: 10px 20px;
-    margin: 0 5px;
+    margin: 5px 0;
     background-color: transparent;
     color: white;
     text-align: center;
@@ -78,152 +77,14 @@ h1 {
     transition: background-color 0.3s, transform 0.3s;
     font-family: 'Courier New', monospace;
     font-size: 1rem;
-    /* Set a specific font size for the buttons */
     cursor: pointer;
 }
-
 
 .nav-button:hover {
     background-color: transparent;
-    color: rgb(4, 132, 141);
+    color: rgb(4, 139, 168);
     text-shadow: none;
     transform: scale(1.1);
-}
-
-/* Media Query for larger screens */
-@media screen and (min-width: 768px) {
-    .nav-title h1 {
-        font-size: 3rem;
-    }
-
-    .nav-button {
-        font-size: 1.5rem;
-    }
-}
-
-/*-----------------------------------------------*/
-/**
- * Styles for the container element.
- */
-.container {
-    text-align: center;
-    width: 80%;
-    max-width: 600px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-/**
- * Styles for the h1 element.
- */
-h1 {
-    color: white;
-    background-color: transparent;
-    font-weight: bold;
-    margin: 0;
-    white-space: nowrap;
-    font-size: 6vw;
-    transition: transform 0.5s ease;
-}
-
-/**
- * Styles for the footer element.
- */
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #000000e8;
-    color: white;
-    text-align: center;
-    padding: 5px 0;
-}
-
-/**
- * Styles for the links inside the footer element.
- */
-footer a {
-    color: white;
-}
-
-/**
- * Styles for the copy element inside the footer element.
- */
-#copy {
-    font-size: 12px;
-}
-
-/**
- * Styles for the links inside the footer element when hovered.
- */
-footer a:hover {
-    color: rgb(4, 132, 141);
-    transform: scale(1.1);
-}
-
-/**
- * Styles for the contact section inside the container element.
- */
-.container #contact {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/**
- * Styles for the contact section inside the section element.
- */
-.section #contact {
-    margin-bottom: 40px;
-}
-
-/**
- * Styles for the label elements.
- */
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    text-align: left;
-    outline: black;
-}
-
-/**
- * Styles for the input and textarea elements.
- */
-input,
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #000000e2;
-    color: white;
-}
-
-/**
- * Styles for the submit button.
- */
-button[type="submit"] {
-    background-color: rgb(4, 167, 179);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/**
- * Styles for the submit button when hovered.
- */
-button[type="submit"]:hover {
-    background-color: rgb(4, 132, 141);
 }
 
 /* Dropdown container */
@@ -241,6 +102,9 @@ button[type="submit"]:hover {
     z-index: 1000;
     border-radius: 5px;
     overflow: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Center the dropdown content */
 }
 
 /* Dropdown menu items */
@@ -254,7 +118,7 @@ button[type="submit"]:hover {
 /* Hover effect for dropdown menu items */
 .dropdown-content a:hover {
     background-color: transparent;
-    color: rgb(4, 132, 141);
+    color: rgb(4, 139, 168);
 }
 
 /* Show dropdown menu when hover over the dropdown button */
@@ -273,6 +137,193 @@ button[type="submit"]:hover {
     outline: none;
 }
 
+/* Media Query for larger screens */
+@media screen and (min-width: 768px) {
+    .navbar {
+        flex-direction: row;
+    }
+
+    .nav-title h1 {
+        font-size: 3rem;
+    }
+
+    .nav-button {
+        font-size: 1.5rem;
+        margin: 0 5px;
+    }
+
+    .container {
+        margin-top: 100px;
+    }
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 767px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 50px;
+    }
+
+    .nav-buttons {
+        flex-direction: column;
+    }
+
+    .nav-title h1 {
+        font-size: 2rem;
+    }
+
+    .nav-button {
+        font-size: 0.8rem;
+        margin: 5px 0;
+    }
+
+    .container {
+        padding: 25px;
+        /* Increase this value to prevent overlap */
+    }
+
+    /* Ensure the dropdown content is centered in mobile view */
+    .dropdown-content {
+        font-size: 0.7rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.container {
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+    align-items: center;
+}
+
+.container#sidePage {
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    position: fixed;
+    align-items: flex-start;
+    top: 120px;
+    /* Add this line to push the sidePage container below the navbar */
+    width: 100%;
+    /* Make sure it spans the full width */
+    z-index: 500;
+    /* Ensure it's below the navbar */
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+/* h1 styles */
+h1 {
+    color: white;
+    background-color: transparent;
+    font-weight: bold;
+    margin: 0;
+    white-space: nowrap;
+    font-size: 6vw;
+    transition: transform 0.5s ease;
+}
+
+/* Footer styles */
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #000000e8;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    z-index: 1000;
+}
+
+footer a {
+    color: white;
+}
+
+#copy {
+    font-size: 12px;
+}
+
+footer a:hover {
+    color: rgb(4, 139, 168);
+    transform: scale(1.1);
+}
+
+.container#contact,
+.container#mainPage {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#contact {
+    margin-bottom: 40px;
+}
+
+.section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left;
+    outline: black;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #000000e2;
+    color: white;
+}
+
+button[type="submit"] {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    color: rgb(4, 139, 168);
+}
+
+
+
 /* STAR STYLING --------------------------------------------------*/
 .star {
     position: absolute;
@@ -288,9 +339,31 @@ button[type="submit"]:hover {
 }
 
 .rare-star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), inset 0 0 5px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    z-index: -999;
+    /* Lower z-index to ensure it's behind other elements */
     animation: fall-rare linear infinite;
     /* Use a separate animation for rare stars */
-    z-index: -999;
+}
+
+
+.rare-star::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('./assets/noise.png');
+    /* Add noise texture image */
+    opacity: 0.1;
+    /* Adjust opacity as needed */
+    clip-path: circle(50% at center);
+    /* Clip the noise texture to a circle shape */
 }
 
 @keyframes fall {
@@ -316,5 +389,3 @@ button[type="submit"]:hover {
         /* Makes the star fall from top to bottom */
     }
 }
-
-/*---------------------------------------------------------------*/
