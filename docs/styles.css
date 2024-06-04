@@ -179,7 +179,7 @@ h1 {
     }
 
     .container {
-        padding: 25px;
+        padding: 40px;
         /* Increase this value to prevent overlap */
     }
 
@@ -223,6 +223,7 @@ h1 {
     /* Make sure it spans the full width */
     z-index: 500;
     /* Ensure it's below the navbar */
+    padding-bottom: 20px;
 }
 
 .container::-webkit-scrollbar {
