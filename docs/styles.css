@@ -23,7 +23,8 @@ body,
 .navbar,
 .nav-button,
 .nav-button:hover,
-h1 {
+h1,
+p {
     text-shadow: 2px 2px 2px #000000;
 }
 
