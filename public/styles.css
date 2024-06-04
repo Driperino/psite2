@@ -216,9 +216,10 @@ h1 {
     justify-content: left;
     position: fixed;
     align-items: flex-start;
+    text-align: left;
     top: 120px;
     /* Add this line to push the sidePage container below the navbar */
-    width: 100%;
+    width: 90%;
     /* Make sure it spans the full width */
     z-index: 500;
     /* Ensure it's below the navbar */
@@ -227,6 +228,7 @@ h1 {
 .container::-webkit-scrollbar {
     display: none;
 }
+
 
 /* h1 styles */
 h1 {
@@ -322,7 +324,9 @@ button[type="submit"]:hover {
     color: rgb(4, 139, 168);
 }
 
-
+.colored-word {
+    color: rgb(4, 139, 168);
+}
 
 /* STAR STYLING --------------------------------------------------*/
 .star {
@@ -345,11 +349,9 @@ button[type="submit"]:hover {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), inset 0 0 5px rgba(0, 0, 0, 0.3);
     opacity: 1;
     z-index: -999;
-    /* Lower z-index to ensure it's behind other elements */
-    animation: fall-rare linear infinite;
+    animation: fall-rare linear infinite, spin var(--spin-speed, 200s) linear infinite;
     /* Use a separate animation for rare stars */
 }
-
 
 .rare-star::after {
     content: '';
@@ -359,11 +361,8 @@ button[type="submit"]:hover {
     right: 0;
     bottom: 0;
     background-image: url('./assets/noise.png');
-    /* Add noise texture image */
     opacity: 0.1;
-    /* Adjust opacity as needed */
     clip-path: circle(50% at center);
-    /* Clip the noise texture to a circle shape */
 }
 
 @keyframes fall {
@@ -380,12 +379,22 @@ button[type="submit"]:hover {
 
 @keyframes fall-rare {
     0% {
-        transform: translateY(-100vh);
-        /* Start above the screen */
+        top: -300px;
+        /* Initial position above the screen */
     }
 
     100% {
-        transform: translateY(100vh);
-        /* Makes the star fall from top to bottom */
+        top: calc(100vh + 300px);
+        /* Move the star to below the screen */
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(calc(360deg * var(--direction)));
     }
 }
