@@ -166,7 +166,7 @@ h1 {
     }
 
     .nav-buttons {
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .nav-title h1 {
