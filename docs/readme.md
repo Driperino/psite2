@@ -27,17 +27,24 @@ This website serves as a personal portfolio for Vincent Winkler. It includes sec
 ## File Structure
 
 `root/`<br>
-`├── index.html`<br>
-`├── about.html`<br>
-`├── contact.html`<br>
-`├── psite.html`<br>
-`├── capstone.html`<br>
-`├── games.html`<br>
-`├── styles.css`<br>
-`├── script.js`<br>
-`├── assets/`<br>
-`│ └── noise.png`<br>
-`└── README.md`<br>
+`├── .git/`<br>
+`├── docs/`<br>
+`│   ├── assets/`<br>
+`│   │   ├── biscuit/`<br>
+`│   │   ├── snake/`<br>
+`│   │   └── noise.png`<br>
+`│   ├── about.html`<br>
+`│   ├── capstone.html`<br>
+`│   ├── CNAME.txt`<br>
+`│   ├── contact.html`<br>
+`│   ├── games.html`<br>
+`│   ├── index.html`<br>
+`│   ├── psite.html`<br>
+`│   ├── README.md`<br>
+`│   ├── script.js`<br>
+`│   └── styles.css`<br>
+`├── .gitattributes.txt`<br>
+`└── CNAME.txt`<br>
 
 ## Setup and Installation
 
@@ -103,8 +110,8 @@ To adjust the star animation settings, you can modify the following constants in
 - **Vincent Winkler** - Design and Development
 - **Google Icons** - Icons used throughout the site
 
-For any further questions or contributions, please contact me at [your email address].
+For any further questions or contributions, please contact me at vincent.winkler98@gmail.com
 
-Enjoy exploring the site!
+Cheers!
 
 &copy; 2024 Vincent Winkler
