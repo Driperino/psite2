@@ -9,7 +9,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    /* Adjusted to prevent overflow issues */
     height: 100vh;
     overflow: hidden;
 }
@@ -50,7 +49,6 @@ p {
     padding: 10px 0;
     flex-direction: row;
     z-index: 1000;
-    /* Ensure navbar is above other elements */
 }
 
 .nav-buttons {
@@ -105,7 +103,6 @@ p {
     overflow: auto;
     left: 50%;
     transform: translateX(-50%);
-    /* Center the dropdown content */
 }
 
 /* Dropdown menu items */
@@ -172,29 +169,50 @@ p {
     scrollbar-width: none;
     -ms-overflow-style: none;
     position: relative;
-    align-items: center;
 }
 
 .container#sidePage {
     height: 80%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    /* Change to column layout */
     align-items: center;
-    justify-content: left;
+    /* Center align items */
+    justify-content: flex-start;
     position: fixed;
-    align-items: flex-start;
     text-align: left;
     top: 120px;
-    /* Add this line to push the sidePage container below the navbar */
     width: 90%;
-    /* Make sure it spans the full width */
     z-index: 500;
-    /* Ensure it's below the navbar */
     padding-bottom: 20px;
 }
 
 .container::-webkit-scrollbar {
     display: none;
+}
+
+/* Container for game items */
+.game-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    /* Add space between game items */
+}
+
+.game-item a.nav-button {
+    text-align: center;
+    margin-bottom: 10px;
+    /* Space between the button and the description */
+}
+
+.game-item p {
+    margin: 0;
+    /* Remove default margins for consistent spacing */
+    padding: 0 20px;
+    /* Add padding for better readability */
+    text-align: center;
+    /* Center text alignment */
 }
 
 /* Media Query for smaller screens */
@@ -223,15 +241,17 @@ p {
         /* Increase this value to prevent overlap */
     }
 
-    /* Ensure the dropdown content is centered in mobile view */
     .dropdown-content {
         font-size: 0.7rem;
         left: 50%;
         transform: translateX(-50%);
     }
+
+    .container#sidePage {
+        padding-top: 20px;
+        /* Add some padding to top in mobile view */
+    }
 }
-
-
 
 /* h1 styles */
 h1 {
@@ -329,6 +349,12 @@ button[type="submit"]:hover {
 
 .colored-word {
     color: rgb(4, 139, 168);
+}
+
+.container.games {
+    margin-top: 100px;
+    max-height: calc(100vh - 275px);
+    overflow-y: auto;
 }
 
 /* STAR STYLING --------------------------------------------------*/

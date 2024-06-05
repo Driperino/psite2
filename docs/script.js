@@ -53,7 +53,6 @@ function createStar() {
     }
   }
 
-  console.log(`Creating star of size: ${size}px with duration: ${duration}s`); // Debugging output
   console.log(`Number of stars generated: ${starCount}`); // Debugging output
 
   star.style.width = `${size}px`;
@@ -101,22 +100,25 @@ function generateStars() {
 document.addEventListener('DOMContentLoaded', generateStars);
 
 //----------------------------------------------------------------
-// Typewriter effect--------------------------------------------------
+// Typewriter effect AND recolour --------------------------------------------------
 function writeStringWithColor() {
   const textBox = document.getElementById('textBox');
   let originalHTML = textBox.innerHTML; // Store the original HTML content as a variable
   const fileName = window.location.pathname.split('/').pop();
-  let word = fileName.split('/').pop().split('.').shift(); // Extract the word from the file name
+  let word = fileName.split('.').shift(); // Extract the word from the file name
 
-  // Check if the word is "psite" and replace it with alternative words
-  if (word === "psite") {
-    const alternativeWords = ["personal website", "personal site", "portfolio site"];
-    for (let i = 0; i < alternativeWords.length; i++) {
-      const alternative = alternativeWords[i];
-      const regex = new RegExp(`\\b${alternative}\\b`, 'gi'); // Create a regular expression to match each alternative word
-      originalHTML = originalHTML.replace(regex, `<span class="colored-word">${alternative}</span>`); // Replace all instances of the alternative word with a span containing the word
-    }
-  }
+  // Define the list of words to be colored based on the file name word
+  const wordsToColor = word === "psite"
+    ? ["personal website", "personal site", "portfolio site"]
+    : [word]; // Use the word itself for coloring if not "psite"
+
+  const regexPatterns = wordsToColor.map(altWord => new RegExp(`(${altWord.replace(/ /g, '\\s')})`, 'gi')); // Create regex for each word to color
+
+  regexPatterns.forEach((regex, index) => {
+    originalHTML = originalHTML.replace(regex, (match) => {
+      return `<span class="colored-word">${match}</span>`; // Replace each word with a span containing the original matched word
+    });
+  });
 
   let index = 0;
 
@@ -141,5 +143,4 @@ function writeStringWithColor() {
 
 // Call the function to start the reveal animation with word coloring
 writeStringWithColor();
-
 //----------------------------------------------------------------
