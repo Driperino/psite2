@@ -17,16 +17,6 @@ p {
     border-radius: 33px;
 }
 
-/* Add black outline to all text */
-body,
-.navbar,
-.nav-button,
-.nav-button:hover,
-h1,
-p {
-    text-shadow: 2px 2px 2px #000000;
-}
-
 .background {
     position: fixed;
     top: 0;
@@ -35,6 +25,16 @@ p {
     height: 100%;
     background: black;
     z-index: -1000;
+}
+
+/* Add black outline to all text */
+body,
+.navbar,
+.nav-button,
+.nav-button:hover,
+h1,
+p {
+    text-shadow: 2px 2px 2px #000000;
 }
 
 /* Navbar styling */
@@ -58,16 +58,17 @@ p {
     align-items: center;
 }
 
-#linkColor {
-    color: white;
-}
-
 .nav-title h1 {
     margin: 0;
     color: white;
     font-size: 2rem;
 }
 
+#linkColor {
+    color: white;
+}
+
+/* Nav button styles */
 .nav-button {
     display: inline-block;
     padding: 10px 20px;
@@ -91,13 +92,12 @@ p {
     transform: scale(1.1);
 }
 
-/* Dropdown container */
+/* Dropdown styles */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* Dropdown menu content (hidden by default) */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -110,7 +110,6 @@ p {
     transform: translateX(-50%);
 }
 
-/* Dropdown menu items */
 .dropdown-content a {
     color: white;
     padding: 12px 16px;
@@ -118,18 +117,15 @@ p {
     display: block;
 }
 
-/* Hover effect for dropdown menu items */
 .dropdown-content a:hover {
     background-color: transparent;
     color: rgb(4, 139, 168);
 }
 
-/* Show dropdown menu when hover over the dropdown button */
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* Styles for the dropdown button */
 .dropbtn {
     background-color: transparent;
     color: white;
@@ -140,26 +136,7 @@ p {
     outline: none;
 }
 
-/* Media Query for larger screens */
-@media screen and (min-width: 768px) {
-    .navbar {
-        flex-direction: row;
-    }
-
-    .nav-title h1 {
-        font-size: 3rem;
-    }
-
-    .nav-button {
-        font-size: 1.5rem;
-        margin: 0 5px;
-    }
-
-    .container {
-        margin-top: 50px;
-    }
-}
-
+/* Container styles */
 .container {
     text-align: center;
     width: 80%;
@@ -180,9 +157,7 @@ p {
     height: 80%;
     display: flex;
     flex-direction: column;
-    /* Change to column layout */
     align-items: center;
-    /* Center align items */
     justify-content: flex-start;
     position: fixed;
     text-align: left;
@@ -194,105 +169,6 @@ p {
 
 .container::-webkit-scrollbar {
     display: none;
-}
-
-/* Container for game items */
-.game-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    /* Add space between game items */
-}
-
-.game-item a.nav-button {
-    text-align: center;
-    margin-bottom: 10px;
-    /* Space between the button and the description */
-}
-
-.game-item p {
-    margin: 0;
-    /* Remove default margins for consistent spacing */
-    padding: 0 20px;
-    /* Add padding for better readability */
-    text-align: center;
-    /* Center text alignment */
-}
-
-/* Media Query for smaller screens */
-@media screen and (max-width: 767px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .nav-buttons {
-        flex-direction: row;
-    }
-
-    .nav-title h1 {
-        font-size: 2rem;
-    }
-
-    .nav-button {
-        font-size: 0.8rem;
-        margin: 5px 0;
-    }
-
-    .container {
-        padding-bottom: 40px;
-        /* Increase this value to prevent overlap */
-    }
-
-    .dropdown-content {
-        font-size: 0.7rem;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .container#sidePage {
-        padding-top: 20px;
-        /* Add some padding to top in mobile view */
-    }
-}
-
-/* h1 styles */
-h1 {
-    color: white;
-    background-color: transparent;
-    font-weight: bold;
-    margin: 0;
-    white-space: nowrap;
-    font-size: 6vw;
-    transition: transform 0.5s ease;
-}
-
-/* Footer styles */
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #000000e8;
-    color: white;
-    text-align: center;
-    padding: 5px 0;
-    z-index: 1000;
-}
-
-footer a {
-    color: white;
-}
-
-#copy {
-    font-size: 12px;
-}
-
-footer a:hover {
-    color: rgb(4, 139, 168);
-    transform: scale(1.1);
 }
 
 .container#contact,
@@ -309,8 +185,10 @@ footer a:hover {
     transform: translate(-50%, -50%);
 }
 
-#contact {
-    margin-bottom: 40px;
+.container.games {
+    margin-top: 100px;
+    max-height: calc(100vh - 275px);
+    overflow-y: auto;
 }
 
 .section {
@@ -318,6 +196,30 @@ footer a:hover {
     margin-bottom: 40px;
 }
 
+#contact {
+    margin-bottom: 40px;
+}
+
+/* Game item styles */
+.game-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.game-item a.nav-button {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.game-item p {
+    margin: 0;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Form styles */
 label {
     display: block;
     margin-bottom: 10px;
@@ -352,39 +254,66 @@ button[type="submit"]:hover {
     color: rgb(4, 139, 168);
 }
 
+/* Typography */
+h1 {
+    color: white;
+    background-color: transparent;
+    font-weight: bold;
+    margin: 0;
+    white-space: nowrap;
+    font-size: 6vw;
+    transition: transform 0.5s ease;
+}
+
 .colored-word {
     color: rgb(4, 139, 168);
 }
 
-.container.games {
-    margin-top: 100px;
-    max-height: calc(100vh - 275px);
-    overflow-y: auto;
+/* Footer styles */
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #000000e8;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    z-index: 1000;
 }
 
-/* STAR STYLING --------------------------------------------------*/
-.star {
-    position: absolute;
-    background-color: white;
-    border-radius: 50%;
-    /* Makes the star circular */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    /* Adds a glow effect */
-    opacity: 1;
-    /* Remove opacity change */
-    animation: fall linear infinite;
-    z-index: -999;
+footer a {
+    color: white;
 }
 
+footer a:hover {
+    color: rgb(4, 139, 168);
+    transform: scale(1.1);
+}
+
+#copy {
+    font-size: 12px;
+}
+
+/* Star styles---------------------------------------------------*/
+.star,
 .rare-star {
     position: absolute;
     background-color: white;
     border-radius: 50%;
+    z-index: -999;
+}
+
+.star {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    opacity: 1;
+    animation: fall linear infinite;
+}
+
+.rare-star {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), inset 0 0 5px rgba(0, 0, 0, 0.3);
     opacity: 1;
-    z-index: -999;
     animation: fall-rare linear infinite, spin var(--spin-speed, 200s) linear infinite;
-    /* Use a separate animation for rare stars */
 }
 
 .rare-star::after {
@@ -399,27 +328,24 @@ button[type="submit"]:hover {
     clip-path: circle(50% at center);
 }
 
+/* Keyframes */
 @keyframes fall {
     0% {
         transform: translateY(-100vh);
-        /* Start above the screen */
     }
 
     100% {
         transform: translateY(100vh);
-        /* Makes the star fall from top to bottom */
     }
 }
 
 @keyframes fall-rare {
     0% {
         top: -300px;
-        /* Initial position above the screen */
     }
 
     100% {
         top: calc(100vh + 300px);
-        /* Move the star to below the screen */
     }
 }
 
@@ -430,5 +356,26 @@ button[type="submit"]:hover {
 
     to {
         transform: rotate(calc(360deg * var(--direction)));
+    }
+}
+
+/*--------------------------------------------------------------*/
+/* Media Query for larger screens */
+@media screen and (min-width: 768px) {
+    .navbar {
+        flex-direction: row;
+    }
+
+    .nav-title h1 {
+        font-size: 3rem;
+    }
+
+    .nav-button {
+        font-size: 1.5rem;
+        margin: 0 5px;
+    }
+
+    .container {
+        margin-top: 50px;
     }
 }
