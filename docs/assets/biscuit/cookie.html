@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <!--I will eventually add the nav bar to this page and implement bootstrap. there are temp links in the footer for navigation-->
+
 <body>
     <div id="biscuit-clickable">
         <img src="cookie.png" alt="Biscuit Image">
@@ -106,10 +108,17 @@
             </table>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 <footer>
-    <a href="../games.html">back</a>
-    <a href="../index.html">home</a>
+    <button id='back' onclick="goBack()">Go Back</button>
+
+    <script>
+        function goBack() {
+            window.location.href = "../../games.html";
+        }
+    </script>
 </footer>
+
 </html>

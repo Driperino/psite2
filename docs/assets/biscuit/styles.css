@@ -15,14 +15,17 @@ body {
     height: auto;
 }
 
-#counter, #bps-counter, #bpc-counter {
+#counter,
+#bps-counter,
+#bpc-counter {
     text-align: center;
     margin: 10px 0;
     font-size: 18px;
 }
 
 #upgrade-container {
-    max-width: 600px; /* Set maximum width for the upgrade container */
+    max-width: 600px;
+    /* Set maximum width for the upgrade container */
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -51,7 +54,8 @@ body {
     border-collapse: collapse;
 }
 
-.upgrade-table th, .upgrade-table td {
+.upgrade-table th,
+.upgrade-table td {
     border: 1px solid #dddddd;
     padding: 8px;
     text-align: center;
@@ -63,6 +67,8 @@ body {
 
 /* Style for disabled upgrade buttons */
 .upgrade-button[disabled] {
-    background-color: #cccccc; /* Grey out the button */
-    cursor: not-allowed; /* Show the not-allowed cursor */
+    background-color: #cccccc;
+    /* Grey out the button */
+    cursor: not-allowed;
+    /* Show the not-allowed cursor */
 }
