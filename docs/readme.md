@@ -2,7 +2,7 @@
 
 Welcome to the source code for Vincent Winkler's personal website. This project showcases my portfolio, personal projects, and contact information.
 
-Feel free to view the site at [here](https://dripy.lol)
+Feel free to view the site <a href="https://dripy.lol" target="_blank">here</a>
 
 ## Table of Contents
 
