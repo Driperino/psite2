@@ -58,6 +58,10 @@ p {
     align-items: center;
 }
 
+#linkColor {
+    color: white;
+}
+
 .nav-title h1 {
     margin: 0;
     color: white;
@@ -79,7 +83,8 @@ p {
     cursor: pointer;
 }
 
-.nav-button:hover {
+.nav-button:hover,
+#linkColor:hover {
     background-color: transparent;
     color: rgb(4, 139, 168);
     text-shadow: none;
