@@ -220,10 +220,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // If it's today's date, display "This is today!"
             daysYearsDisplay.textContent = 'This is today!';
           } else {
-            // Otherwise, calculate the difference in days and years
             // Calculate the difference in milliseconds between the clicked date and the current date
-            const timeDifference = Math.abs(clickedDate.getTime() - Date.now());
-            const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // Use Math.ceil to round up
+            const timeDifference = clickedDate.getTime() - Date.now();
+            const daysDifference = Math.ceil(Math.abs(timeDifference) / (1000 * 60 * 60 * 24)); // Use Math.ceil to round up
 
             const yearsDifference = Math.floor(daysDifference / 365);
             const remainingDays = daysDifference % 365;
@@ -296,5 +295,6 @@ document.addEventListener('DOMContentLoaded', function () {
     renderCalendar();
   }
 });
+
 
 //----------------------------------------------------------------
