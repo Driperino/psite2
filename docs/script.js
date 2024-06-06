@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const prevMonthBtn = document.getElementById('prevMonth');
   const nextMonthBtn = document.getElementById('nextMonth');
   const fullDateDisplay = document.getElementById('fullDateDisplay'); // New element for displaying full date
+  const daysYearsDisplay = document.getElementById('daysYearsDisplay'); // New element for displaying days and years
 
   // Initialize currentDate to the current date
   let currentDate = new Date();
@@ -201,8 +202,50 @@ document.addEventListener('DOMContentLoaded', function () {
           day: 'numeric',
           year: 'numeric'
         });
+
+        // Check if the clicked date is today's date
+        if (isToday(clickedDate)) {
+          // If it's today's date, display "This is today!"
+          daysYearsDisplay.textContent = 'This is today!';
+        } else {
+          // Otherwise, calculate the difference in days and years
+          // Calculate the difference in milliseconds between the clicked date and the current date
+          // Calculate the absolute difference in milliseconds between the clicked date and the current date
+          const timeDifference = Math.abs(clickedDate.getTime() - Date.now());
+          const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // Use Math.ceil to round up
+
+          const yearsDifference = Math.floor(daysDifference / 365);
+          const remainingDays = daysDifference % 365;
+
+          // Display the difference in days and years
+          if (timeDifference < 0) {
+            // If the clicked date is before today's date
+            if (yearsDifference > 0) {
+              // If the difference is more than 1 year, display years and remaining days
+              daysYearsDisplay.textContent = `Days since this date: ${yearsDifference} years, ${remainingDays} days`;
+            } else {
+              // Otherwise, display only the remaining days
+              daysYearsDisplay.textContent = `Days since this date: ${remainingDays} days`;
+            }
+          } else {
+            // If the clicked date is after today's date
+            if (yearsDifference > 0) {
+              // If the difference is more than 1 year, display years and remaining days
+              daysYearsDisplay.textContent = `Days until this date: ${yearsDifference} years, ${remainingDays} days`;
+            } else {
+              // Otherwise, display only the remaining days
+              daysYearsDisplay.textContent = `Days until this date: ${remainingDays} days`;
+            }
+          }
+        }
       });
     }
+  }
+
+  // Function to check if a date is today's date
+  function isToday(date) {
+    const today = new Date();
+    return date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
   }
 
   // Event listener for the previous month button
