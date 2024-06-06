@@ -144,3 +144,84 @@ function writeStringWithColor() {
 // Call the function to start the reveal animation with word coloring
 writeStringWithColor();
 //----------------------------------------------------------------
+//Calendar
+// Wait for the DOM content to be fully loaded before executing the script
+document.addEventListener('DOMContentLoaded', function () {
+  // Get references to DOM elements
+  const calendarContainer = document.getElementById('calendar');
+  const monthYearDisplay = document.getElementById('monthYear');
+  const prevMonthBtn = document.getElementById('prevMonth');
+  const nextMonthBtn = document.getElementById('nextMonth');
+  const fullDateDisplay = document.getElementById('fullDateDisplay'); // New element for displaying full date
+
+  // Initialize currentDate to the current date
+  let currentDate = new Date();
+
+  // Function to render the calendar
+  function renderCalendar() {
+    // Clear the calendar container before rendering
+    calendarContainer.innerHTML = '';
+    // Get the month and year from currentDate
+    const month = currentDate.getMonth();
+    const year = currentDate.getFullYear();
+
+    // Display the month and year in the header
+    monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+
+    // Get the first day of the month and the total days in the month
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Create empty day elements for the days before the first day of the month
+    for (let i = 0; i < firstDayOfMonth; i++) {
+      const emptyDay = document.createElement('div');
+      calendarContainer.appendChild(emptyDay);
+    }
+
+    // Create day elements for each day in the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayElement = document.createElement('div');
+      dayElement.textContent = day;
+      dayElement.className = 'calendar-day';
+      calendarContainer.appendChild(dayElement);
+
+      // Event listener to handle click on a date
+      dayElement.addEventListener('click', function () {
+        // Remove 'calendar-day--selected' class from all elements
+        document.querySelectorAll('.calendar-day--selected').forEach(el => el.classList.remove('calendar-day--selected'));
+        // Add 'calendar-day--selected' class to the clicked element
+        dayElement.classList.add('calendar-day--selected');
+
+        // Create a new Date object for the clicked date
+        const clickedDate = new Date(year, month, day);
+        // Display the full date below the calendar
+        fullDateDisplay.textContent = clickedDate.toLocaleString('default', {
+          weekday: 'long',
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
+        });
+      });
+    }
+  }
+
+  // Event listener for the previous month button
+  prevMonthBtn.addEventListener('click', function () {
+    // Move currentDate to the previous month
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    // Render the calendar for the new month
+    renderCalendar();
+  });
+
+  // Event listener for the next month button
+  nextMonthBtn.addEventListener('click', function () {
+    // Move currentDate to the next month
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    // Render the calendar for the new month
+    renderCalendar();
+  });
+
+  // Initial rendering of the calendar
+  renderCalendar();
+});
+//----------------------------------------------------------------

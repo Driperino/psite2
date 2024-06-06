@@ -16,7 +16,7 @@ Feel free to view the site <a href="https://dripy.lol" target="_blank">here</a>
 
 ## Project Overview
 
-This website serves as a personal portfolio for Vincent Winkler. It includes sections for an about page, contact information, and links to various projects. The site features a dynamic background with animated stars, a typewriter effect for displaying text, and a responsive design.
+This website serves as a personal portfolio for Vincent Winkler. It includes sections for an about page, contact information, and links to various projects. The site features a dynamic background with animated stars, a typewriter effect for displaying text, an interactive calendar and a responsive design.
 
 ## Technologies Used
 
@@ -36,6 +36,7 @@ This website serves as a personal portfolio for Vincent Winkler. It includes sec
 `│   │   ├── snake/`<br>
 `│   │   └── noise.png`<br>
 `│   ├── about.html`<br>
+`│   ├── calendar.html`<br>
 `│   ├── capstone.html`<br>
 `│   ├── CNAME.txt`<br>
 `│   ├── contact.html`<br>
@@ -69,6 +70,10 @@ The background features an animated star field where stars fall from the top to 
 ### Typewriter Effect
 
 The text in the `#textBox` element is revealed using a typewriter effect, with specific words highlighted based on the current page.
+
+### Calendar
+
+The Calendar page includes an interactive calendar that allows users to view and navigate through different months, as well as select specific dates.
 
 ### Responsive Design
 

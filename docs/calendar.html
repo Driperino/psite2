@@ -7,7 +7,7 @@
     <title>VW Personal Site</title>
     <!--Google icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-    <!--my style sheet-->
+    <!--My stylesheet-->
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -15,7 +15,7 @@
     <div class="background"></div>
     <nav class="navbar">
         <div class="nav-title">
-            <h1>Games</h1>
+            <h1>Calendar</h1>
         </div>
         <div class="nav-buttons">
             <a href="about.html" class="nav-button">About</a>
@@ -31,21 +31,18 @@
             </div>
         </div>
     </nav>
-
-
-    <div id="sidePage" class="container section games">
-        <a href="assets/biscuit/cookie.html" class="nav-button">
-            <h2>Biscuit <br> Bopper</h2>
-        </a>
-        <p>
-            I made a Cookie Clicker clone called Biscuit Bopper! Still a work in progress..
-        </p>
-        <a href="assets/snake/index.html" class="nav-button">
-            <h2>Snake</h2>
-        </a>
-        <p>
-            It's a rough version of snake!
-        </p>
+    <div id="textBox"></div> <!-- handles an error-->
+    <div id="sidePage" class="container section">
+        <div id="calendar-container">
+            <div id="calendar-header">
+                <button id="prevMonth">&lt;</button>
+                <h2 id="monthYear"></h2>
+                <button id="nextMonth">&gt;</button>
+            </div>
+            <div id="calendar"></div>
+            <br>
+            <div id="fullDateDisplay"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>
