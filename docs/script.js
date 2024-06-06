@@ -1,24 +1,26 @@
 //Star background--------------------------------------------------
-let currentStars = 0;
-const maxStars = 25;
-let starCount = 0;
+// Initializing variables to keep track of stars
+let currentStars = 0; // Current number of stars
+const maxStars = 25; // Maximum number of stars allowed on the screen
+let starCount = 0; // Count of total stars generated
 let rareStarActive = false; // Flag to track if a rare star is active
 
+// Function to create a star
 function createStar() {
+  // Check if the maximum number of stars has been reached
   if (currentStars >= maxStars) {
-    return;
+    return; // Exit the function if the maximum stars limit has been reached
   }
 
+  // Creating a new star element
   const star = document.createElement('div');
-  star.classList.add('star');
+  star.classList.add('star'); // Adding CSS class for styling
 
-  // Set the vertical position to always start at the top
-  star.style.top = '0px';
+  // Setting the position of the star
+  star.style.top = '0px'; // Starting from the top
+  star.style.left = `${Math.random() * window.innerWidth}px`; // Random horizontal position within the window width
 
-  // Set the horizontal position to a random value within the window width
-  star.style.left = `${Math.random() * window.innerWidth}px`;
-
-  // Randomize the size of the star
+  // Randomizing the size and duration of the star animation
   let size;
   let duration;
   let isRareStar;
@@ -28,208 +30,205 @@ function createStar() {
     isRareStar = false; // If a rare star is already active, create a normal star
   } else {
     // Determine if this star will be a rare star
-    isRareStar = Math.random() < 1 / 10;
+    isRareStar = Math.random() < 1 / 10; // 1 in 10 chance for a star to be rare
   }
 
+  // Setting size and duration based on rarity
   if (isRareStar) {
+    // Rare star properties
     const minRareSize = 150;
     const maxRareSize = 275;
     size = Math.floor(Math.random() * (maxRareSize - minRareSize + 1)) + minRareSize;
-    // Slow down the animation based on size
-    duration = (size / minRareSize) * 45; // Example calculation
-    // Set the rare star active flag
-    rareStarActive = true;
+    duration = (size / minRareSize) * 45; // Adjusting duration based on size
+    rareStarActive = true; // Setting the rare star active flag
   } else {
+    // Normal star properties
     const minSize = 2;
     const maxSize = 5;
     size = Math.floor(Math.random() * (maxSize - minSize + 1)) + minSize;
-    // Randomize the animation duration for normal stars
-    // const minDuration = 12;
-    // const maxDuration = 20;
     if (size <= 2) {
-      duration = size * 2;
+      duration = size * 2; // Slower animation for smaller stars
     } else {
       duration = size * 10;
     }
   }
 
-  console.log(`Number of stars generated: ${starCount}`); // Debugging output
-
+  // Setting size and animation duration
   star.style.width = `${size}px`;
   star.style.height = `${size}px`;
   star.style.animationDuration = `${duration}s`;
 
-  // Styling for the Rare stars - They're planets but i dont wanna change all the names in the code.......
+  // Styling for rare stars
   if (isRareStar) {
-    const rareStarColors = ['rgb(190, 183, 223)', 'rgb(4, 139, 168)', 'rgb(242, 211, 152)', 'rgb(144, 50, 61)', 'rgb(86, 71, 135)']; // Add more colours here
+    const rareStarColors = ['rgb(190, 183, 223)', 'rgb(4, 139, 168)', 'rgb(242, 211, 152)', 'rgb(144, 50, 61)', 'rgb(86, 71, 135)']; // Possible rare star colors
     let randomColor = rareStarColors[Math.floor(Math.random() * rareStarColors.length)];
     star.classList.add('rare-star');
     star.style.backgroundColor = randomColor;
-    star.style.opacity = 1;
-    star.style.zIndex = '-900'; // BG is -1000 navbar and footer is +1000
-    star.style.boxShadow = `0 0 10px ${randomColor}`;
-    // Randomize the spin direction
-    const spinDirection = Math.random() < 0.5 ? 1 : -1;
-    star.style.setProperty('--direction', spinDirection);
-    // Randomize the spin speed
+    star.style.opacity = 1; // Making rare stars fully visible
+    star.style.zIndex = '-900'; // Adjusting z-index for rare stars
+    star.style.boxShadow = `0 0 10px ${randomColor}`; // Adding a glowing effect
+    const spinDirection = Math.random() < 0.5 ? 1 : -1; // Randomizing spin direction
+    star.style.setProperty('--direction', spinDirection); // Setting CSS custom property for spin direction
     const minSpinSpeed = 10;
     const maxSpinSpeed = 30;
-    const spinSpeed = Math.random() * (maxSpinSpeed - minSpinSpeed) + minSpinSpeed;
-    star.style.setProperty('--direction', spinDirection === 1 ? 1 : -1);
-    console.log(`Creating rare star with color: ${randomColor} and spin speed: ${spinSpeed}s`); // Debugging output
+    const spinSpeed = Math.random() * (maxSpinSpeed - minSpinSpeed) + minSpinSpeed; // Randomizing spin speed
+    star.style.setProperty('--direction', spinDirection === 1 ? 1 : -1); // Setting CSS custom property for spin speed
   }
 
+  // Appending the star to the document body
   document.body.appendChild(star);
+
+  // Updating star counts
   currentStars++;
   starCount++;
 
-  // Destroy the star after the animation ends
+  // Removing the star after the animation ends
   star.addEventListener('animationend', () => {
     star.remove();
     currentStars--;
     if (isRareStar) {
-      rareStarActive = false; // Reset the rare star active flag
+      rareStarActive = false; // Resetting the rare star active flag
     }
   });
 }
 
+// Function to generate stars at regular intervals
 function generateStars() {
-  setInterval(createStar, 1750); // CHANGE THIS TO CONTROL # OF STARS - higher is less
+  setInterval(createStar, 1750); // Adjust the interval to control the rate of star generation
 }
 
+// Starting star generation when the DOM content is fully loaded
 document.addEventListener('DOMContentLoaded', generateStars);
 
 //----------------------------------------------------------------
 // Typewriter effect AND recolour --------------------------------------------------
 function writeStringWithColor() {
-  // Check if the textBox element exists on the page
+  // Checking if the textBox element exists on the page
   const textBox = document.getElementById('textBox');
-  if (!textBox) return; // Exit the function if textBox element doesn't exist
+  if (!textBox) return; // If textBox doesn't exist, we can't do anything
 
-  let originalHTML = textBox.innerHTML; // Store the original HTML content as a variable
+  // Storing the original HTML content of the textBox
+  let originalHTML = textBox.innerHTML;
+  // Extracting the word from the file name in the URL
   const fileName = window.location.pathname.split('/').pop();
-  let word = fileName.split('.').shift(); // Extract the word from the file name
+  let word = fileName.split('.').shift(); // Extracting the word part from the file name
 
-  // Define the list of words to be colored based on the file name word
+  // Defining the list of words to be colored based on the file name word
   const wordsToColor = word === "psite"
-    ? ["personal website", "personal site", "portfolio site"]
-    : [word]; // Use the word itself for coloring if not "psite"
+    ? ["personal website", "personal site", "portfolio site"] // If the word is "psite", we have these words to color
+    : [word]; // Otherwise, we just use the word itself for coloring
 
-  const regexPatterns = wordsToColor.map(altWord => new RegExp(`(${altWord.replace(/ /g, '\\s')})`, 'gi')); // Create regex for each word to color
+  // Creating regex patterns for each word to color
+  const regexPatterns = wordsToColor.map(altWord => new RegExp(`(${altWord.replace(/ /g, '\\s')})`, 'gi'));
 
+  // Replacing each word in the originalHTML with a span containing the original matched word for coloring
   regexPatterns.forEach((regex, index) => {
     originalHTML = originalHTML.replace(regex, (match) => {
-      return `<span class="colored-word">${match}</span>`; // Replace each word with a span containing the original matched word
+      return `<span class="colored-word">${match}</span>`;
     });
   });
 
+  // Starting index for revealing characters
   let index = 0;
 
   function revealCharacterAndColor() {
     if (index < originalHTML.length) {
-      // Add the current character to the textBox
-      const currentText = originalHTML.substr(0, index + 1); // Get the current substring
+      // Adding the current character to the textBox
+      const currentText = originalHTML.substr(0, index + 1);
       textBox.innerHTML = currentText;
 
       index++;
-      // Call revealCharacterAndColor recursively after a delay
+      // Recursive call to continue revealing characters after a delay
       setTimeout(revealCharacterAndColor, 2); // Adjust the delay as needed for desired typing speed
     }
   }
 
-  // Clear the existing text content of the textBox
+  // Clearing the existing text content of the textBox
   textBox.innerHTML = '';
 
-  // Start revealing characters after a short delay
+  // Starting to reveal characters after a short delay
   setTimeout(revealCharacterAndColor, 500); // Adjust the delay as needed before text starts appearing
 }
 
-// Call the function to start the reveal animation with word coloring
+// Calling the function to start the reveal animation with word coloring
 writeStringWithColor();
 
 //----------------------------------------------------------------
 //Calendar
-// Wait for the DOM content to be fully loaded before executing the script
+// Waiting for the page to load completely before running the script
 document.addEventListener('DOMContentLoaded', function () {
-  // Check if the current page is calendar.html
+  // Checking if the current page is the calendar page
   if (window.location.pathname.endsWith('/calendar.html')) {
-    // Your calendar-specific JavaScript code goes here
-    // Get references to DOM elements
+    // All the fun stuff happens here for the calendar
+    // Getting references to different parts of the calendar
     const calendarContainer = document.getElementById('calendar');
     const monthYearDisplay = document.getElementById('monthYear');
     const prevMonthBtn = document.getElementById('prevMonth');
     const nextMonthBtn = document.getElementById('nextMonth');
-    const fullDateDisplay = document.getElementById('fullDateDisplay'); // New element for displaying full date
-    const daysYearsDisplay = document.getElementById('daysYearsDisplay'); // New element for displaying days and years
+    const fullDateDisplay = document.getElementById('fullDateDisplay'); // This is where we'll show the full date
+    const daysYearsDisplay = document.getElementById('daysYearsDisplay'); // This is where we'll show days and years
 
-    // Initialize currentDate to the current date
+    // Initializing the current date to today
     let currentDate = new Date();
 
-    // Function to render the calendar
+    // Function to draw the calendar
     function renderCalendar() {
-      // Clear the calendar container before rendering
+      // Clearing the calendar before drawing
       calendarContainer.innerHTML = '';
-      // Get the month and year from currentDate
+      // Extracting the month and year from the current date
       const month = currentDate.getMonth();
       const year = currentDate.getFullYear();
 
-      // Display the month and year in the header
+      // Showing the month and year in the header
       monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
 
-      // Get the first day of the month and the total days in the month
+      // Finding out the first day of the month and the total number of days in the month
       const firstDayOfMonth = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-      // Create empty day elements for the days before the first day of the month
+      // Creating blank spots for the days before the first day of the month
       for (let i = 0; i < firstDayOfMonth; i++) {
         const emptyDay = document.createElement('div');
         calendarContainer.appendChild(emptyDay);
       }
 
-      // Create day elements for each day in the month
+      // Drawing each day of the month
       for (let day = 1; day <= daysInMonth; day++) {
         const dayElement = document.createElement('div');
         dayElement.textContent = day;
         dayElement.className = 'calendar-day';
         calendarContainer.appendChild(dayElement);
 
-        // Event listener to handle click on a date
+        // Adding a click event listener for each day
         dayElement.addEventListener('click', function () {
-          // Create a new Date object for the clicked date
+          // All the magic happens when a day is clicked
           const clickedDate = new Date(year, month, day);
-          // Display the full date below the calendar
+          // Showing the full date below the calendar
           fullDateDisplay.textContent = `${clickedDate.toLocaleString('default', { weekday: 'long' })}, ${clickedDate.toLocaleString('default', { month: 'long' })} ${day}${getDaySuffix(day)}, ${year}`;
 
-          // Check if the clicked date is today's date
+          // Checking if the clicked date is today
           if (isToday(clickedDate)) {
-            // If it's today's date, display "This is today!"
+            // If it's today, let the user know
             daysYearsDisplay.textContent = 'This is today!';
           } else {
-            // Otherwise, calculate the difference in days and years
-            // Calculate the difference in milliseconds between the clicked date and the current date
+            // Otherwise, do some math to show the number of days since or until the date
             const timeDifference = Math.abs(clickedDate.getTime() - Date.now());
-            const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // Use Math.ceil to round up
-
+            const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
             const yearsDifference = Math.floor(daysDifference / 365);
             const remainingDays = daysDifference % 365;
 
-            // Display the difference in days and years
             if (timeDifference < 0) {
-              // If the clicked date is before today's date
+              // If it's in the past
               if (yearsDifference > 0) {
-                // If the difference is more than 1 year, display years and remaining days
                 daysYearsDisplay.textContent = `Days since this date: ${yearsDifference} year${yearsDifference > 1 ? 's' : ''}, ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
               } else {
-                // Otherwise, display only the remaining days
                 daysYearsDisplay.textContent = `Days since this date: ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
               }
             } else {
-              // If the clicked date is after today's date
+              // If it's in the future
               if (yearsDifference > 0) {
-                // If the difference is more than 1 year, display years and remaining days
                 daysYearsDisplay.textContent = `Days until this date: ${yearsDifference} year${yearsDifference > 1 ? 's' : ''}, ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
               } else {
-                // Otherwise, display only the remaining days
                 daysYearsDisplay.textContent = `Days until this date: ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
               }
             }
@@ -261,24 +260,25 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // Add event listener for prevMonthBtn (previous month button)
+    // Event listener for the previous month button
     prevMonthBtn.addEventListener('click', function () {
-      // Move currentDate to the previous month
+      // Moving to the previous month
       currentDate.setMonth(currentDate.getMonth() - 1);
-      // Render the calendar for the new month
+      // Drawing the new month
       renderCalendar();
     });
 
-    // Add event listener for nextMonthBtn (next month button)
+    // Event listener for the next month button
     nextMonthBtn.addEventListener('click', function () {
-      // Move currentDate to the next month
+      // Moving to the next month
       currentDate.setMonth(currentDate.getMonth() + 1);
-      // Render the calendar for the new month
+      // Drawing the new month
       renderCalendar();
     });
 
-    // Initial rendering of the calendar
+    // Drawing the initial calendar
     renderCalendar();
   }
 });
+
 //----------------------------------------------------------------
