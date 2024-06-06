@@ -105,3 +105,8 @@ updateUpgradeTables();
 
 // Start the game loop
 gameLoop();
+
+//back button
+function goBack() {
+    window.location.href = "../../games.html";
+}
