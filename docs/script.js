@@ -102,7 +102,10 @@ document.addEventListener('DOMContentLoaded', generateStars);
 //----------------------------------------------------------------
 // Typewriter effect AND recolour --------------------------------------------------
 function writeStringWithColor() {
+  // Check if the textBox element exists on the page
   const textBox = document.getElementById('textBox');
+  if (!textBox) return; // Exit the function if textBox element doesn't exist
+
   let originalHTML = textBox.innerHTML; // Store the original HTML content as a variable
   const fileName = window.location.pathname.split('/').pop();
   let word = fileName.split('.').shift(); // Extract the word from the file name
@@ -143,128 +146,139 @@ function writeStringWithColor() {
 
 // Call the function to start the reveal animation with word coloring
 writeStringWithColor();
+
 //----------------------------------------------------------------
 //Calendar
 // Wait for the DOM content to be fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', function () {
-  // Get references to DOM elements
-  const calendarContainer = document.getElementById('calendar');
-  const monthYearDisplay = document.getElementById('monthYear');
-  const prevMonthBtn = document.getElementById('prevMonth');
-  const nextMonthBtn = document.getElementById('nextMonth');
-  const fullDateDisplay = document.getElementById('fullDateDisplay'); // New element for displaying full date
-  const daysYearsDisplay = document.getElementById('daysYearsDisplay'); // New element for displaying days and years
+  // Check if the current page is calendar.html
+  if (window.location.pathname.endsWith('/calendar.html')) {
+    // Your calendar-specific JavaScript code goes here
+    // Get references to DOM elements
+    const calendarContainer = document.getElementById('calendar');
+    const monthYearDisplay = document.getElementById('monthYear');
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
+    const fullDateDisplay = document.getElementById('fullDateDisplay'); // New element for displaying full date
+    const daysYearsDisplay = document.getElementById('daysYearsDisplay'); // New element for displaying days and years
 
-  // Initialize currentDate to the current date
-  let currentDate = new Date();
+    // Initialize currentDate to the current date
+    let currentDate = new Date();
 
-  // Function to render the calendar
-  function renderCalendar() {
-    // Clear the calendar container before rendering
-    calendarContainer.innerHTML = '';
-    // Get the month and year from currentDate
-    const month = currentDate.getMonth();
-    const year = currentDate.getFullYear();
+    // Function to render the calendar
+    function renderCalendar() {
+      // Clear the calendar container before rendering
+      calendarContainer.innerHTML = '';
+      // Get the month and year from currentDate
+      const month = currentDate.getMonth();
+      const year = currentDate.getFullYear();
 
-    // Display the month and year in the header
-    monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+      // Display the month and year in the header
+      monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
 
-    // Get the first day of the month and the total days in the month
-    const firstDayOfMonth = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+      // Get the first day of the month and the total days in the month
+      const firstDayOfMonth = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    // Create empty day elements for the days before the first day of the month
-    for (let i = 0; i < firstDayOfMonth; i++) {
-      const emptyDay = document.createElement('div');
-      calendarContainer.appendChild(emptyDay);
-    }
+      // Create empty day elements for the days before the first day of the month
+      for (let i = 0; i < firstDayOfMonth; i++) {
+        const emptyDay = document.createElement('div');
+        calendarContainer.appendChild(emptyDay);
+      }
 
-    // Create day elements for each day in the month
-    for (let day = 1; day <= daysInMonth; day++) {
-      const dayElement = document.createElement('div');
-      dayElement.textContent = day;
-      dayElement.className = 'calendar-day';
-      calendarContainer.appendChild(dayElement);
+      // Create day elements for each day in the month
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.textContent = day;
+        dayElement.className = 'calendar-day';
+        calendarContainer.appendChild(dayElement);
 
-      // Event listener to handle click on a date
-      dayElement.addEventListener('click', function () {
-        // Remove 'calendar-day--selected' class from all elements
-        document.querySelectorAll('.calendar-day--selected').forEach(el => el.classList.remove('calendar-day--selected'));
-        // Add 'calendar-day--selected' class to the clicked element
-        dayElement.classList.add('calendar-day--selected');
+        // Event listener to handle click on a date
+        dayElement.addEventListener('click', function () {
+          // Create a new Date object for the clicked date
+          const clickedDate = new Date(year, month, day);
+          // Display the full date below the calendar
+          fullDateDisplay.textContent = `${clickedDate.toLocaleString('default', { weekday: 'long' })}, ${clickedDate.toLocaleString('default', { month: 'long' })} ${day}${getDaySuffix(day)}, ${year}`;
 
-        // Create a new Date object for the clicked date
-        const clickedDate = new Date(year, month, day);
-        // Display the full date below the calendar
-        fullDateDisplay.textContent = clickedDate.toLocaleString('default', {
-          weekday: 'long',
-          month: 'long',
-          day: 'numeric',
-          year: 'numeric'
-        });
-
-        // Check if the clicked date is today's date
-        if (isToday(clickedDate)) {
-          // If it's today's date, display "This is today!"
-          daysYearsDisplay.textContent = 'This is today!';
-        } else {
-          // Otherwise, calculate the difference in days and years
-          // Calculate the difference in milliseconds between the clicked date and the current date
-          // Calculate the absolute difference in milliseconds between the clicked date and the current date
-          const timeDifference = Math.abs(clickedDate.getTime() - Date.now());
-          const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // Use Math.ceil to round up
-
-          const yearsDifference = Math.floor(daysDifference / 365);
-          const remainingDays = daysDifference % 365;
-
-          // Display the difference in days and years
-          if (timeDifference < 0) {
-            // If the clicked date is before today's date
-            if (yearsDifference > 0) {
-              // If the difference is more than 1 year, display years and remaining days
-              daysYearsDisplay.textContent = `Days since this date: ${yearsDifference} years, ${remainingDays} days`;
-            } else {
-              // Otherwise, display only the remaining days
-              daysYearsDisplay.textContent = `Days since this date: ${remainingDays} days`;
-            }
+          // Check if the clicked date is today's date
+          if (isToday(clickedDate)) {
+            // If it's today's date, display "This is today!"
+            daysYearsDisplay.textContent = 'This is today!';
           } else {
-            // If the clicked date is after today's date
-            if (yearsDifference > 0) {
-              // If the difference is more than 1 year, display years and remaining days
-              daysYearsDisplay.textContent = `Days until this date: ${yearsDifference} years, ${remainingDays} days`;
+            // Otherwise, calculate the difference in days and years
+            // Calculate the difference in milliseconds between the clicked date and the current date
+            const timeDifference = Math.abs(clickedDate.getTime() - Date.now());
+            const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // Use Math.ceil to round up
+
+            const yearsDifference = Math.floor(daysDifference / 365);
+            const remainingDays = daysDifference % 365;
+
+            // Display the difference in days and years
+            if (timeDifference < 0) {
+              // If the clicked date is before today's date
+              if (yearsDifference > 0) {
+                // If the difference is more than 1 year, display years and remaining days
+                daysYearsDisplay.textContent = `Days since this date: ${yearsDifference} year${yearsDifference > 1 ? 's' : ''}, ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
+              } else {
+                // Otherwise, display only the remaining days
+                daysYearsDisplay.textContent = `Days since this date: ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
+              }
             } else {
-              // Otherwise, display only the remaining days
-              daysYearsDisplay.textContent = `Days until this date: ${remainingDays} days`;
+              // If the clicked date is after today's date
+              if (yearsDifference > 0) {
+                // If the difference is more than 1 year, display years and remaining days
+                daysYearsDisplay.textContent = `Days until this date: ${yearsDifference} year${yearsDifference > 1 ? 's' : ''}, ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
+              } else {
+                // Otherwise, display only the remaining days
+                daysYearsDisplay.textContent = `Days until this date: ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
+              }
             }
           }
-        }
-      });
+        });
+      }
     }
-  }
 
-  // Function to check if a date is today's date
-  function isToday(date) {
-    const today = new Date();
-    return date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
-  }
+    // Function to check if a date is today's date
+    function isToday(date) {
+      const today = new Date();
+      return date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
+    }
 
-  // Event listener for the previous month button
-  prevMonthBtn.addEventListener('click', function () {
-    // Move currentDate to the previous month
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    // Render the calendar for the new month
+    // Function to get the suffix for a day number (e.g., 1st, 2nd, 3rd, ...)
+    function getDaySuffix(day) {
+      if (day >= 11 && day <= 13) {
+        return 'th';
+      }
+      switch (day % 10) {
+        case 1:
+          return 'st';
+        case 2:
+          return 'nd';
+        case 3:
+          return 'rd';
+        default:
+          return 'th';
+      }
+    }
+
+    // Add event listener for prevMonthBtn (previous month button)
+    prevMonthBtn.addEventListener('click', function () {
+      // Move currentDate to the previous month
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      // Render the calendar for the new month
+      renderCalendar();
+    });
+
+    // Add event listener for nextMonthBtn (next month button)
+    nextMonthBtn.addEventListener('click', function () {
+      // Move currentDate to the next month
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      // Render the calendar for the new month
+      renderCalendar();
+    });
+
+    // Initial rendering of the calendar
     renderCalendar();
-  });
-
-  // Event listener for the next month button
-  nextMonthBtn.addEventListener('click', function () {
-    // Move currentDate to the next month
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    // Render the calendar for the new month
-    renderCalendar();
-  });
-
-  // Initial rendering of the calendar
-  renderCalendar();
+  }
 });
 //----------------------------------------------------------------

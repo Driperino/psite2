@@ -148,6 +148,7 @@ p {
     justify-content: center;
     max-height: calc(100vh - 275px);
     overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
     position: relative;
