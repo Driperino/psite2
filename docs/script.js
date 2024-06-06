@@ -155,80 +155,96 @@ writeStringWithColor();
 
 //----------------------------------------------------------------
 //Calendar
-// Waiting for the page to load completely before running the script
+// Wait for the DOM content to be fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', function () {
-  // Checking if the current page is the calendar page
+  // Check if the current page is calendar.html
   if (window.location.pathname.endsWith('/calendar.html')) {
-    // All the fun stuff happens here for the calendar
-    // Getting references to different parts of the calendar
+    // Your calendar-specific JavaScript code goes here
+    // Get references to DOM elements
     const calendarContainer = document.getElementById('calendar');
     const monthYearDisplay = document.getElementById('monthYear');
     const prevMonthBtn = document.getElementById('prevMonth');
     const nextMonthBtn = document.getElementById('nextMonth');
-    const fullDateDisplay = document.getElementById('fullDateDisplay'); // This is where we'll show the full date
-    const daysYearsDisplay = document.getElementById('daysYearsDisplay'); // This is where we'll show days and years
+    const fullDateDisplay = document.getElementById('fullDateDisplay'); // New element for displaying full date
+    const daysYearsDisplay = document.getElementById('daysYearsDisplay'); // New element for displaying days and years
 
-    // Initializing the current date to today
+    // Initialize currentDate to the current date
     let currentDate = new Date();
 
-    // Function to draw the calendar
+    // Function to render the calendar
     function renderCalendar() {
-      // Clearing the calendar before drawing
+      // Clear the calendar container before rendering
       calendarContainer.innerHTML = '';
-      // Extracting the month and year from the current date
+      // Get the month and year from currentDate
       const month = currentDate.getMonth();
       const year = currentDate.getFullYear();
 
-      // Showing the month and year in the header
+      // Display the month and year in the header
       monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
 
-      // Finding out the first day of the month and the total number of days in the month
+      // Get the first day of the month and the total days in the month
       const firstDayOfMonth = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-      // Creating blank spots for the days before the first day of the month
+      // Create empty day elements for the days before the first day of the month
       for (let i = 0; i < firstDayOfMonth; i++) {
         const emptyDay = document.createElement('div');
         calendarContainer.appendChild(emptyDay);
       }
 
-      // Drawing each day of the month
+      // Create day elements for each day in the month
       for (let day = 1; day <= daysInMonth; day++) {
         const dayElement = document.createElement('div');
         dayElement.textContent = day;
         dayElement.className = 'calendar-day';
         calendarContainer.appendChild(dayElement);
 
-        // Adding a click event listener for each day
+        // Event listener to handle click on a date
         dayElement.addEventListener('click', function () {
-          // All the magic happens when a day is clicked
+          // Remove the selected class from all calendar-day elements
+          const allCalendarDays = document.querySelectorAll('.calendar-day');
+          allCalendarDays.forEach(calendarDay => {
+            calendarDay.classList.remove('calendar-day--selected');
+          });
+
+          // Add the selected class to the clicked day element
+          dayElement.classList.add('calendar-day--selected');
+
+          // Create a new Date object for the clicked date
           const clickedDate = new Date(year, month, day);
-          // Showing the full date below the calendar
+          // Display the full date below the calendar
           fullDateDisplay.textContent = `${clickedDate.toLocaleString('default', { weekday: 'long' })}, ${clickedDate.toLocaleString('default', { month: 'long' })} ${day}${getDaySuffix(day)}, ${year}`;
 
-          // Checking if the clicked date is today
+          // Check if the clicked date is today's date
           if (isToday(clickedDate)) {
-            // If it's today, let the user know
+            // If it's today's date, display "This is today!"
             daysYearsDisplay.textContent = 'This is today!';
           } else {
-            // Otherwise, do some math to show the number of days since or until the date
+            // Otherwise, calculate the difference in days and years
+            // Calculate the difference in milliseconds between the clicked date and the current date
             const timeDifference = Math.abs(clickedDate.getTime() - Date.now());
-            const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+            const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // Use Math.ceil to round up
+
             const yearsDifference = Math.floor(daysDifference / 365);
             const remainingDays = daysDifference % 365;
 
+            // Display the difference in days and years
             if (timeDifference < 0) {
-              // If it's in the past
+              // If the clicked date is before today's date
               if (yearsDifference > 0) {
+                // If the difference is more than 1 year, display years and remaining days
                 daysYearsDisplay.textContent = `Days since this date: ${yearsDifference} year${yearsDifference > 1 ? 's' : ''}, ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
               } else {
+                // Otherwise, display only the remaining days
                 daysYearsDisplay.textContent = `Days since this date: ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
               }
             } else {
-              // If it's in the future
+              // If the clicked date is after today's date
               if (yearsDifference > 0) {
+                // If the difference is more than 1 year, display years and remaining days
                 daysYearsDisplay.textContent = `Days until this date: ${yearsDifference} year${yearsDifference > 1 ? 's' : ''}, ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
               } else {
+                // Otherwise, display only the remaining days
                 daysYearsDisplay.textContent = `Days until this date: ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
               }
             }
@@ -260,23 +276,23 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // Event listener for the previous month button
+    // Add event listener for prevMonthBtn (previous month button)
     prevMonthBtn.addEventListener('click', function () {
-      // Moving to the previous month
+      // Move currentDate to the previous month
       currentDate.setMonth(currentDate.getMonth() - 1);
-      // Drawing the new month
+      // Render the calendar for the new month
       renderCalendar();
     });
 
-    // Event listener for the next month button
+    // Add event listener for nextMonthBtn (next month button)
     nextMonthBtn.addEventListener('click', function () {
-      // Moving to the next month
+      // Move currentDate to the next month
       currentDate.setMonth(currentDate.getMonth() + 1);
-      // Drawing the new month
+      // Render the calendar for the new month
       renderCalendar();
     });
 
-    // Drawing the initial calendar
+    // Initial rendering of the calendar
     renderCalendar();
   }
 });
